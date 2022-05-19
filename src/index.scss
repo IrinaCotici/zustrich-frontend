@@ -1,0 +1,19 @@
+@import './style/variables.scss';
+#root {
+  height: 100%;
+}
+
+html {
+  height: 100%;
+  font-family: 'Roboto Slab';
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
