@@ -1,0 +1,136 @@
+@import '../style/variables.scss';
+
+.header-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: $green;
+  height: 85px;
+  z-index: 3;
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  .header-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.tabs {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  cursor: pointer;
+
+  .MuiSvgIcon-root, span {
+    color: $blue;
+  }
+
+  &:hover {
+    .MuiSvgIcon-root, span {
+      color: $red;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: $blue;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.tooltip {
+  padding: 0.7rem 1.7rem;
+  background-color: white;
+  color: #587998;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  display: inline-block;
+  position: relative;
+  border-radius: 5px;
+  bottom: -120px;
+  width: 160px;
+  height: 80px;
+  opacity: 0;
+  transition: all 155ms ease-in-out;
+  position: absolute;
+}
+
+.tooltip::before {
+  content:"";
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 15px solid white;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform:translateX(-50%);
+}
+
+.profile:hover .tooltip{
+  opacity: 1;
+}
+
+/* btn-15 */
+.btn-15 {
+  overflow: hidden;
+}
+
+.btn-15 a {
+  position: relative;
+  -webkit-transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -o-transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn-15 a:after {
+  content: attr( data-menu-name ); 
+  display: block; 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+	-webkit-transform: translateY( -100% );
+	-ms-transform: translateY( -100% );
+	-o-transform: translateY( -100% );
+	transform: translateY( -100% );
+}
+
+.btn-15 a:hover{
+  color: $blue;
+  font-weight: bold;
+	-webkit-transform: translateY( 100% );
+	-ms-transform: translateY( 100% );
+	-o-transform: translateY( 100% );
+	transform: translateY( 100% );
+}

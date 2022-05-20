@@ -1,10 +1,22 @@
 @import '../style/variables.scss';
 
+a {
+  text-decoration: none;
+}
+
+.main-container {
+  height: 100%;
+}
+
+.wrapper {
+  background: $radial-green;
+}
+
 .default-wrapper {
   height: 100%;
   display: flex;
   align-items: center;
-  background: $radial-green;
+  position: relative;
 
   .container {
     width: 626px;
@@ -16,46 +28,56 @@
     flex-direction: column;
     align-items: center;
     z-index: 2;
+  }
 
-    .title {
-      font-weight: 400;
-      font-size: 72px;
-      line-height: 95px;
-      text-align: center;
-      margin-top: -60px;
-      margin-bottom: 15px;
-    }
+  
+  .title {
+    font-weight: 400;
+    line-height: 63px;
+    text-align: center;
+    font-size: 48px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .request-title {
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+
+  .login-title {
+    font-size: 72px;
+    margin-bottom: 15px;
+    margin-top: -60px;
   }
 
   .MuiButtonBase-root {
     width: 323px;
     border-radius: 48px;
     border: 1px solid black;
-  }
+    
+    &.MuiButton-containedPrimary {
+      color: white;
+      background-color: $blue;
+      margin: 10px 0;
+  
+      &:hover {
+        background-color: $hovered-blue !important;
+        border: 1px solid black;
+      }
+    }
 
-  .MuiButton-containedPrimary {
-    color: white;
-    background-color: $blue;
-    margin: 10px 0;
-  }
-
-  .MuiButton-containedSecondary {
-    width: 323px;
-    background-color: transparent;
-    color: $blue;
-    // border: 1px solid $blue;
-  }
-
-  .MuiButton-containedPrimary:hover {
-    background-color: $hovered-blue !important;
-    border: 1px solid black;
-  }
-
-
-  .MuiButton-containedSecondary:hover {
-    background-color: $hovered-grey;
-    color: $blue;
-    border: 1px solid $blue;
+    &.MuiButton-containedSecondary {
+      width: 323px;
+      background-color: transparent;
+      color: $blue;
+  
+      &:hover {
+        background-color: $hovered-grey;
+        color: $blue;
+        border: 1px solid $blue;
+      }
+    }
   }
 
   .MuiOutlinedInput-root {
@@ -68,8 +90,33 @@
   width: auto;
 }
 
-.MuiFormLabel-root.Mui-focused {
-  // color: $blue !important;
+.small-logo {
+  height: 130px;
+  margin-top: 0px;
+}
+
+textarea {
+  font-family: 'Roboto Slab';
+  font-size: 1rem;
+  padding: 14px;
+  width: 344px;
+  background: $hovered-grey;
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.38);
+  border-radius: 5px;
+  margin: 10px 0 !important;
+  max-width: 344px;
+  min-width: 344px;
+  max-height: 200px;
+  height: 200px;
+}
+
+textarea::placeholder {
+  color: #000000a1;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+textarea:focus {
+  outline: $blue;
 }
 
 .MuiFormControl-root {
@@ -78,6 +125,25 @@
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.38);
   border-radius: 5px;
   margin: 10px 0 !important;
+}
+
+.select-btn {
+  border: 1px solid rgba(0, 0, 0, 0.23) !important;
+
+  label {
+    margin-left: 14px;
+  }
+
+  .MuiInputLabel-shrink {
+    transform: translate(0, -7.5px) scale(0.75);
+    background-color: $green;
+    width: 43px;
+    text-align: center;
+  }
+
+  .MuiSelect-select {
+    padding-left: 14px;
+  }
 }
 
 .small-icon {
@@ -89,16 +155,84 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  z-index: 1;
 }
 
 .wave2 {
   position: absolute;
   right: 360px;
   bottom: 0;
+  z-index: 1;
 }
 
 .wave3 {
   position: absolute;
   left: -55px;
   bottom: 0;
+  z-index: 1;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 372px;
+
+
+  .select-btn {
+    width: 240px;
+  }
+
+  .qty-input {
+    width: 119px;
+  }
+}
+
+.table-wrapper {
+  width: 80%;
+  margin: 150px auto 20px auto;
+
+  a {
+    color: $blue;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    &:hover {
+      color: $red;
+    }
+  }
+}
+
+.MuiTable-root th {
+  background-color: $blue;
+  color: white;
+}
+
+.MuiTableCell-root a {
+  justify-content: flex-start;
+}
+
+.MuiChip-root {
+  width: 80px;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+
+  &.MuiChip-filledInfo {
+    border: 1px solid $blue;
+    color: $blue;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #3E66FB;
+  }
+  
+  &.MuiChip-filledError {
+    border: 1px solid $red;
+    color: $red;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #F03738;
+  }
 }
