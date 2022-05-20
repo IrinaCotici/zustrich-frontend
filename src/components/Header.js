@@ -1,8 +1,9 @@
 import React, { useContext, } from "react";
 import { Link } from "react-router-dom";
 import '../style/header.scss'
-import { Tooltip } from '@material-ui/core'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 function Header(props) {
     const getLingks = () => {
         const categories = [
@@ -39,7 +40,7 @@ function Header(props) {
         <div className="header-wrapper">
             <div className="header-container">
                 <Link
-                    to="/"
+                    to="/requests"
                     className="">
                     <img
                         className="small-logo"
@@ -57,6 +58,13 @@ function Header(props) {
                     <li> LOCATION: <span>ceva</span></li>
                     <li> EMAIL: <span>ceva</span></li>
                     <li> PHONE: <span>ceva</span></li>
+                    <li className="logout">
+                    <Link
+                        to='/login'>
+                        Logout
+                        <LogoutIcon></LogoutIcon>
+                    </Link>
+                    </li>
                   </ul>
                 </div>
             </div>

@@ -38,12 +38,16 @@ function ViewStock() {
   return (
     <div className="main-container wrapper">
       <Header></Header>
-      <div className='tables-wrapper'>
-        <div className='requests-wrapper'>
-          <div className='header'>PENDING REQUESTS</div>
-          <div className='body'></div>
+      <div className='stock-container'>
+        <a className="add-btn" href='/add-location'>+ CREATE REQUEST</a>
+        <div className='tables-wrapper'>
+          <div className='requests-wrapper'>
+            <div className='header'>PENDING REQUESTS</div>
+            <div className='body'></div>
+          </div>
+          <Stock></Stock>
         </div>
-        <Stock></Stock>
+
       </div>
     </div>
   );
