@@ -12,6 +12,8 @@ import AddLocation from './pages/AddLocation';
 import AddRequest from './pages/AddRequest';
 import Users from './pages/Users';
 import Locations from './pages/Locations';
+import Requests from './pages/Requests';
+import ViewStock from './pages/ViewStock';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/add-request" element={ <AddRequest /> } />
           <Route path="/users" element={ <Users /> } />
           <Route path="/locations" element={ <Locations /> } />
+          <Route path="/requests" element={ <Requests /> } />
+          <Route path="/view-stock" element={ <ViewStock /> } />
           {/* <Route path="/logout" element={ <Logout /> } /> */}
         </Routes>
       </Router>

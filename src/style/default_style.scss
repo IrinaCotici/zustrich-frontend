@@ -195,12 +195,13 @@ input:-internal-autofill-selected {
 .table-wrapper {
   width: 80%;
   margin: 150px auto 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
   a {
     color: $blue;
     font-weight: bold;
-    display: flex;
-    justify-content: flex-end;
     margin-bottom: 15px;
     cursor: pointer;
 
@@ -234,5 +235,169 @@ input:-internal-autofill-selected {
     border: 1px solid $red;
     color: $red;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #F03738;
+  }
+}
+
+.cards-wrapper {
+  width: 90%;
+  margin: 150px auto 20px auto;
+  display: grid;
+}
+
+.card-wrapper {
+  display: flex;
+  width: 430px;
+
+  svg {
+    vertical-align: bottom;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+  
+  .card-status {
+    width: 88px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    text-align: center;
+    display: flex;
+    padding-bottom: 12px;
+    text-transform: uppercase;
+    font-size: 14px;
+    align-items: flex-end;
+    justify-content: center;
+    
+    &.open {
+      background-color: $green;
+    }
+    
+    &.pending {
+      background-color: $yellow;
+    }
+
+    &.closed {
+      background-color: $red;
+    }
+  }
+
+  .MuiCardActions-root {
+    justify-content: space-between;
+  }
+  
+  .completed-qty {
+    height: 28px;
+    width: 122px;
+    border: 1px solid rgba(0, 0, 0, 0.41);
+    color: rgba(0, 0, 0, 0.41);
+    border-radius: 5px;
+    padding: 5px 0 0 10px;
+  }
+  .MuiFormControl-root {
+    width: 122px;
+    margin: 0 !important;
+    height: 28px;
+    justify-content: space-between;
+    background-color: white;
+
+    .MuiInputLabel-formControl {
+      top: -14px;
+      height: 28px;
+
+    }
+    .MuiOutlinedInput-input {
+      padding: 0 0 0 14px !important;
+      height: 28px;
+    }
+
+    .MuiInputLabel-shrink {
+      transform: translate(14px, 5px) scale(0.75);
+    }
+  }
+
+  .MuiButton-root {
+    color: $blue;
+  }
+}
+
+.tables-wrapper {
+  display: flex;
+  width: 90%;
+  margin: 150px auto 20px auto;
+  justify-content: space-between;
+}
+
+.requests-wrapper {
+  width: 600px;
+  height: auto;
+  overflow: auto;
+  border-radius: 5px;
+
+  .header {
+    background-color: $blue;
+    color: white;
+    line-height: 1.5rem;
+    padding: 16px
+  }
+
+  .body {
+    background-color: white;
+    height: 500px;
+  }
+}
+
+.stock-wrapper {
+  width: 800px;
+
+  .MuiFormControl-root {
+    width: 240px;
+  }
+
+  .MuiButton-root {
+    width: 170px;
+    background-color: $blue;
+    height: 40px;
+    border-radius: 48px;
+  }
+
+  td:last-child {
+    display: flex;
+    justify-content: center;
+    height: 76px;
+    align-items: center;
+
+  }
+
+  th:first-child {
+    width: 350px;
+  }
+
+  th:nth-child(2) {
+    width: 200px;
+  }
+  .qty-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 45px;
+    border: 1px solid rgba(0, 0, 0, 0.41);;
+    border-radius: 5px;
+
+    svg {
+      color: $blue;
+      cursor: pointer;
+
+      &:hover {
+        color: $red;
+      }
+    }
+  }
+  input {
+    width: 90px;
+    border: 0;
+    outline: none;
+    padding-left: 45px;
   }
 }

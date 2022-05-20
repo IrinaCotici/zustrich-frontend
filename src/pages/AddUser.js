@@ -17,7 +17,7 @@ function AddUser() {
     ))
   }
   return (
-    <div className="main-container">
+    <div className="main-container wrapper">
       <Header></Header>
       <DefaultWrapper>
         <span className="title">CREATE USER</span>
