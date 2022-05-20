@@ -74,12 +74,32 @@
   display: inline-block;
   position: relative;
   border-radius: 5px;
-  bottom: -120px;
+  bottom: -180px;
   width: 160px;
-  height: 80px;
+  height: 140px;
   opacity: 0;
   transition: all 155ms ease-in-out;
   position: absolute;
+
+  span, svg {
+    color: $blue !important;
+  }
+
+  .logout a {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &:hover {
+      color: $red;
+
+      svg {
+        color: $red !important;
+      }
+    }
+  }
 }
 
 .tooltip::before {
