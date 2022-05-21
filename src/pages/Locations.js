@@ -80,7 +80,7 @@ function Locations() {
             <TableBody>
               { locations.map((location) => (
                 <TableRow
-                  key={location.name}
+                  key={location.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>{location.name}</TableCell>
@@ -88,8 +88,12 @@ function Locations() {
                   <TableCell>{location.moderators}</TableCell>
                   <TableCell>{location.description}</TableCell>
                   <TableCell>
-                    <Link to={"/location/" + location._id}>SEE THE STOCK</Link>
-                  </TableCell>
+                    {
+                      user.location?._id === location._id ?
+                      <Link to={"/location/" + location._id}>SEE THE STOCK</Link> :
+                      null
+                    }
+                    </TableCell>
                 </TableRow>
               ))}
             </TableBody>

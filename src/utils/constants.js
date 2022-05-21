@@ -9,4 +9,4 @@ export const USER_ROLES = [
   },
 ];
 
-export const API_URL = 'https://little-jars-relax-109-166-128-142.loca.lt';
+export const API_URL = 'https://thick-crews-unite-109-166-128-142.loca.lt';

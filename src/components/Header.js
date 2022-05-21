@@ -10,6 +10,21 @@ function Header(props) {
 
     const [user, updateUser] = useState({});
 
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+          axios.get(API_URL + "/auth/user_data",
+              {
+                headers: {
+                  token: localStorage.getItem("token")
+              },
+          })
+          .then(res => {
+            updateUser(res.data);
+          })
+          .catch(err => console.log(err));
+        }
+      }, [localStorage.getItem("token")])
+
     const ROLE_MAP = {
         1: "Admin",
         2: "Moderator",
@@ -46,11 +61,12 @@ function Header(props) {
             {
                 label: "USERS",
                 to: "/users",
-                users: [1, 2],
+                users: [1],
             },
         ]
 
         return categories
+            .filter(category => category.users.includes(user.role))
             .map((category , idx) => (
                 <Link
                     key={ `link-${ idx }` }

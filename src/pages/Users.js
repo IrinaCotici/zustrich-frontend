@@ -31,19 +31,19 @@ function Users() {
       })
       .then(res => {
         updateUser(res.data);
+
+          axios.get(API_URL + "/user",
+              {
+                headers: {
+                  token: localStorage.getItem("token")
+              },
+          })
+          .then(res => {
+            updateUsers(res.data);
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err));
-
-      axios.get(API_URL + "/user",
-          {
-            headers: {
-              token: localStorage.getItem("token")
-          },
-      })
-      .then(res => {
-        updateUsers(res.data);
-      })
-      .catch(err => console.log(err))
     }
   }, [localStorage.getItem("token")])
 
