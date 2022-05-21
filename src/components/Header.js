@@ -53,7 +53,7 @@ function Header(props) {
                 <div className="profile">
                   <AccountCircleIcon fontSize="large" />
                   <span> USERNAME </span>
-                  <ul class="tooltip">
+                  <ul className="tooltip">
                     <li> ROLE: <span>ceva</span></li>
                     <li> LOCATION: <span>ceva</span></li>
                     <li> EMAIL: <span>ceva</span></li>

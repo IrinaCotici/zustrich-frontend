@@ -20,7 +20,7 @@ function Locations() {
     <div className="main-container wrapper">
       <Header></Header>
       <div className="table-wrapper">
-        <a class="add-btn" href='/add-location'>+ ADD LOCATION</a>
+        <a className="add-btn" href='/add-location'>+ ADD LOCATION</a>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -42,7 +42,7 @@ function Locations() {
                   <TableCell>{row.address}</TableCell>
                   <TableCell>{row.moderators}</TableCell>
                   <TableCell>{row.description}</TableCell>
-                  <TableCell><a class="add-btn">{row.stock}</a></TableCell>
+                  <TableCell><a className="add-btn">{row.stock}</a></TableCell>
                 </TableRow>
               ))}
             </TableBody>

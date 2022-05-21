@@ -1,6 +1,6 @@
 import { useEffect, useState, } from 'react';
 import axios from "axios";
-import { API_URL, } from "../constants";
+import { API_URL, } from "../utils/constants";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

@@ -8,3 +8,5 @@ export const USER_ROLES = [
       label: "Moderator",
   },
 ];
+
+export const API_URL = 'http://localhost:3001';
