@@ -15,10 +15,6 @@ function createData(name, email, phone, location, role, status) {
   return { name, email, phone, location, role, status };
 }
 
-const rows = [
-  createData('Superadmin', 'admin@gmail.com', '00000000000', 'Gara de nord', 'admin', 1),
-];
-
 function Users() {
   const [user, updateUser] = useState({});
   const [users, updateUsers] = useState([]);
@@ -39,19 +35,19 @@ function Users() {
       })
       .then(res => {
         updateUser(res.data);
+
+          axios.get(API_URL + "/user",
+              {
+                headers: {
+                  token: localStorage.getItem("token")
+              },
+          })
+          .then(res => {
+            updateUsers(res.data);
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err));
-
-      axios.get(API_URL + "/user",
-          {
-            headers: {
-              token: localStorage.getItem("token")
-          },
-      })
-      .then(res => {
-        updateUsers(res.data);
-      })
-      .catch(err => console.log(err))
     }
   }, [localStorage.getItem("token")])
 

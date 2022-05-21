@@ -56,7 +56,7 @@ function AddUser() {
   const getRoles = (USER_ROLES) => {
     return USER_ROLES.map((role) => (
       <MenuItem
-        key={ role.value }
+        key={ role.id }
         value={ role.value }
       >
         { role.label }

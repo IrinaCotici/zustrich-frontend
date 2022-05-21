@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import DefaultWrapper from "../components/wrappers/DefaultWrapper"
 import { TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
-import { USER_ROLES } from "../utils/constants";
 import Header from "../components/Header";
 import { API_URL, } from "../utils/constants.js"
 import axios from "axios";
