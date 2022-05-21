@@ -1,3 +1,4 @@
+import { useState, } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,15 +13,28 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import IconButton from '@mui/material/IconButton';
 
-function createData(name, quantity) {
-  return { name, quantity};
-}
+function Stock({stock, rights, updateStock, addProduct}) {
+  const [quantity, updateQuantity] = useState({});
+  const [newName, updateNewName] = useState();
+  const [newQuantity, updateNewQuantity] = useState();
 
-const rows = [
-  createData('Pahare de hartie', 20),
-];
+  const onChange = (name) => (e) => {
+    updateQuantity({ ...quantity, [name]: e.target.value, });
+  }
 
-function Stock() {
+  const onChangeName = (e) => {
+    updateNewName(e.target.value);
+  }
+
+  const onChangeQuantity = (e) => {
+    updateNewQuantity(e.target.value);
+  }
+
+  const onClick = (name, type) => () => {
+    updateStock(name, type * parseInt(quantity[name]));
+    updateQuantity({ ...quantity, [name]: "", });
+  }
+
   return (
     <div className="main-container wrapper stock-wrapper">
         <TableContainer component={Paper}>
@@ -29,36 +43,58 @@ function Stock() {
               <TableRow>
                 <TableCell>NAME</TableCell>
                 <TableCell>QUANTITY</TableCell>
+                <TableCell>PENDING</TableCell>
                 <TableCell>&nbsp;</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              { rows.map((row) => (
+              { stock?.map((stockItem) => (
                 <TableRow
-                  key={row.name}
+                  key={stockItem.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.quantity}</TableCell>
+                  <TableCell>{stockItem.name}</TableCell>
+                  <TableCell>{stockItem.available}</TableCell>
+                  <TableCell>{stockItem.pending}</TableCell>
                   <TableCell>
                     <div className='qty-input-wrapper'>
-                    <IconButton><DoNotDisturbOnIcon></DoNotDisturbOnIcon></IconButton>
-                      <input placeholder='Quantity'></input>
-                      <IconButton><AddCircleIcon></AddCircleIcon></IconButton>
+                      <IconButton
+                        onClick={ onClick(stockItem.name, -1) }
+                        disabled={ !rights }>
+                        <DoNotDisturbOnIcon className={ !rights ? "disabled" : "" } />
+                      </IconButton>
+                      <input
+                        onChange={ onChange(stockItem.name) }
+                        value={ quantity[stockItem.name] }
+                        disabled={ !rights }
+                        placeholder='Quantity'></input>
+                      <IconButton
+                        onClick={ onClick(stockItem.name, 1) }
+                        disabled={ !rights }>
+                        <AddCircleIcon className={ !rights ? "disabled" : "" }/>
+                      </IconButton>
                     </div>
                   </TableCell>
                 </TableRow>
               ))}
-              <TableRow>
-              <TableCell>
-                <TextField id="outlined-basic" label="Product name" variant="outlined"/>
-              </TableCell><TableCell>
-                <TextField id="outlined-basic" label="Quantity" variant="outlined"/>
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="primary">SAVE</Button>
-              </TableCell>
-              </TableRow>
+              { rights && (
+                <TableRow>
+                    <TableCell>
+                      <TextField onChange={onChangeName} id="outlined-basic" label="Product name" variant="outlined"/>
+                    </TableCell>
+                    <TableCell>
+                      <TextField onChange={onChangeQuantity} id="outlined-basic" label="Quantity" variant="outlined"/>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        onClick={ addProduct(newName, parseInt(newQuantity)) }
+                        variant="contained"
+                        color="primary">
+                          SAVE
+                      </Button>
+                    </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>

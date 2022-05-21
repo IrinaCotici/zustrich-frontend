@@ -11,14 +11,6 @@ import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import Header from '../components/Header';
 
-function createData(name, email, phone, location, role, status) {
-  return { name, email, phone, location, role, status };
-}
-
-const rows = [
-  createData('Superadmin', 'admin@gmail.com', '00000000000', 'Gara de nord', 'admin', 1),
-];
-
 function Users() {
   const [user, updateUser] = useState({});
   const [users, updateUsers] = useState([]);

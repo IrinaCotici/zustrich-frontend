@@ -42,7 +42,7 @@ function Requests() {
     }
   }, [localStorage.getItem("token")])
 
-  const fulfillRequest = (request, quantity, index) => {
+  const processRequest = (request, quantity, index) => {
     if (!isNaN(quantity) && localStorage.getItem("token")) {
       axios.put(API_URL + "/request/fulfill/" + request._id, { quantity: quantity, },
           {
@@ -91,7 +91,7 @@ function Requests() {
         { requests.map((request, index) => (
           <Card
             key={'req' + index}
-            fulfillRequest={ fulfillRequest }
+            processRequest={ processRequest }
             index={ index }
             request={request}/>
         )) }

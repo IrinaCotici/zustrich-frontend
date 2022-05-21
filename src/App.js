@@ -77,7 +77,7 @@ function App() {
           <Route path="/users" element={ <Users /> } />
           <Route path="/locations" element={ <Locations /> } />
           <Route path="/requests" element={ <Requests /> } />
-          <Route path="/view-stock" element={ <ViewStock /> } />
+          <Route path="/location/:id" element={ <ViewStock /> } />
           {/* <Route path="/logout" element={ <Logout /> } /> */}
         </Routes>
       </Router>

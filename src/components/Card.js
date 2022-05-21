@@ -12,7 +12,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-function BasicCard({request, fulfillRequest, index}) {
+function BasicCard({request, processRequest, index, canResolve}) {
   const STATUS_MAP = {
     1: "open",
     2: "pending",
@@ -25,7 +25,7 @@ function BasicCard({request, fulfillRequest, index}) {
   }
 
   const onClick = () => {
-    fulfillRequest(request, parseInt(quantity), index);
+    processRequest(request, parseInt(quantity), index);
     updateQuantity("");
   }
 
@@ -52,19 +52,33 @@ function BasicCard({request, fulfillRequest, index}) {
           }
         </CardContent>
         <CardActions>
-          <TextField
-            id="outlined-basic"
-            onChange={ onChange }
-            value={ quantity }
-            disabled={STATUS_MAP[request.status] !== 'open'}
-            label="Quantity"
-            variant="outlined"/>
-          <Button
-            size="small"
-            onClick={ onClick }
-            disabled={ STATUS_MAP[request.status] !== 'open' }>
-              FULFILL
-            </Button>
+          { canResolve && (request.status === 2 || request.status === 3) ? (
+            <>
+              <div></div>
+              <Button
+                size="small"
+                onClick={ onClick }
+                disabled={ STATUS_MAP[request.status] !== 'pending' }>
+                  RESOLVE
+              </Button>
+            </>
+          ) : (
+            <>
+              <TextField
+                id="outlined-basic"
+                onChange={ onChange }
+                value={ quantity }
+                disabled={STATUS_MAP[request.status] !== 'open'}
+                label="Quantity"
+                variant="outlined"/>
+              <Button
+                size="small"
+                onClick={ onClick }
+                disabled={ STATUS_MAP[request.status] !== 'open' }>
+                  FULFILL
+              </Button>
+            </>
+          )}
         </CardActions>
       </Card>
     </div>
