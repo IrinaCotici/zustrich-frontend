@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -10,46 +11,60 @@ import PlaceIcon from '@mui/icons-material/Place';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
 
-function BasicCard({props}) {
+function BasicCard({request, fulfillRequest, index}) {
+  const STATUS_MAP = {
+    1: "open",
+    2: "pending",
+    3: "closed",
+  }
+  const [quantity, updateQuantity] = useState();
+
+  const onChange = e => {
+    updateQuantity(e.target.value);
+  }
+
+  const onClick = () => {
+    fulfillRequest(request, parseInt(quantity), index);
+    updateQuantity("");
+  }
 
   return (
     <div className='card-wrapper'>
-      <div className={ `card-status ${ props.status }`}>{ props.status }</div>
-      <Card sx={{ minWidth: 275 }}>
+      <div className={ `card-status ${ STATUS_MAP[request.status] }`}>{ STATUS_MAP[request.status] }</div>
+      <Card className="card-content" sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h5" component="div">
-            { props.productName } / { props.quantity}
+            { request.productName } / { request.productQuantity}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            <PlaceIcon></PlaceIcon> {props.location}
+            <PlaceIcon></PlaceIcon> {request.location.address}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            <AccountCircleIcon></AccountCircleIcon> {props.moderator}
+            <AccountCircleIcon></AccountCircleIcon> {request.creator.name}
           </Typography>
           {
-            props.providerName ?
+            request.provider ?
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              <FavoriteIcon></FavoriteIcon> {props.providerName}
+              <FavoriteIcon></FavoriteIcon> {request.provider.name}
             </Typography> :
             null
           }
         </CardContent>
         <CardActions>
-          {
-            props.status === 'open' ?
-            <TextField id="outlined-basic" label="Quantity" variant="outlined"/> :
-            <div className='completed-qty'>{ props.quantity }</div>
-          }
-          <Button size="small" disabled={ props.status !== 'open' }>FULFILL</Button>
+          <TextField
+            id="outlined-basic"
+            onChange={ onChange }
+            value={ quantity }
+            disabled={STATUS_MAP[request.status] !== 'open'}
+            label="Quantity"
+            variant="outlined"/>
+          <Button
+            size="small"
+            onClick={ onClick }
+            disabled={ STATUS_MAP[request.status] !== 'open' }>
+              FULFILL
+            </Button>
         </CardActions>
       </Card>
     </div>

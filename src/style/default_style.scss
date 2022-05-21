@@ -110,6 +110,10 @@ textarea {
   height: 200px;
 }
 
+.MuiPaper-elevation {
+  width: 100%;
+}
+
 textarea::placeholder {
   color: #000000a1;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -242,11 +246,15 @@ input:-internal-autofill-selected {
   width: 90%;
   margin: 150px auto 20px auto;
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 120px;
+  row-gap: 60px;
+  padding-bottom: 50px;
 }
 
 .card-wrapper {
   display: flex;
-  width: 430px;
+  height: 280px;
 
   svg {
     vertical-align: bottom;
@@ -257,7 +265,7 @@ input:-internal-autofill-selected {
   }
   
   .card-status {
-    width: 88px;
+    min-width: 90px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
@@ -280,6 +288,12 @@ input:-internal-autofill-selected {
     &.closed {
       background-color: $red;
     }
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .MuiCardActions-root {
