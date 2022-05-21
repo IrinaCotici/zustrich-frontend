@@ -21,7 +21,7 @@ function Users() {
     <div className="main-container wrapper">
       <Header></Header>
       <div className="table-wrapper">
-        <a class="add-btn" href='/add-user'>+ ADD USER</a>
+        <a className="add-btn" href='/add-user'>+ ADD USER</a>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
