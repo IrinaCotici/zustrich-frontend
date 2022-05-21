@@ -6,7 +6,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-// import axios from "axios";
 import Login from './pages/Login.js';
 import { API_URL, } from "./utils/constants.js"
 import AddUser from './pages/AddUser';
