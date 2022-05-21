@@ -11,7 +11,6 @@ import { useNavigate, } from "react-router-dom";
 
 function AddUser() {
   const navigate = useNavigate();
-  const [ userType, updateUserType ] = useState(USER_ROLES[0]);
   const [locations, updateLocations] = useState([]);
   
   const [form, updateForm] = useState({
