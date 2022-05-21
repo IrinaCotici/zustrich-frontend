@@ -68,7 +68,7 @@ function Login() {
       <img className="logo" src="/logo.png"/>
       <span className="title login-title">Login</span>
       <TextField onChange={ _handleChange } name="email" label="Email" variant="outlined" />
-      <TextField onChange={ _handleChange } name="password" label="Password" variant="outlined" />
+      <TextField onChange={ _handleChange } type="password" name="password" label="Password" variant="outlined" />
       <Button onClick={ _onClick } variant="contained" color="primary">SIGN IN</Button>
       <Button startIcon={<img className="small-icon" src="/google_logo.png" />} variant="contained" color="secondary">SIGN IN WITH GOOGLE</Button>
     </DefaultWrapper>
