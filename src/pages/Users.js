@@ -39,7 +39,6 @@ function Users() {
       })
       .then(res => {
         updateUser(res.data);
-        console.log(res.data)
       })
       .catch(err => console.log(err));
 
@@ -51,7 +50,6 @@ function Users() {
       })
       .then(res => {
         updateUsers(res.data);
-        console.log(res.data)
       })
       .catch(err => console.log(err))
     }
@@ -66,8 +64,7 @@ function Users() {
           },
       })
       .then(res => {
-        console.log(res.data);
-        updateUsers(users.map(user => user._id === id ? res.data : user))
+        updateUsers(users.map(user => user._id === id ? { ...user, blocked: !user.blocked, } : user))
       })
       .catch(err => console.log(err))
     }

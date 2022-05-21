@@ -26,7 +26,6 @@ function Requests() {
       })
       .then(res => {
         updateUser(res.data);
-        console.log(res.data)
       })
       .catch(err => console.log(err));
 
@@ -38,7 +37,6 @@ function Requests() {
       })
       .then(res => {
         updateRequests(res.data);
-        console.log(res.data)
       })
       .catch(err => console.log(err))
     }

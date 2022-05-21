@@ -1,10 +1,36 @@
-import React, { useContext, } from "react";
+import React, { useState, useEffect, } from "react";
+import axios from "axios";
+import { API_URL, } from "../utils/constants";
 import { Link } from "react-router-dom";
 import '../style/header.scss'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header(props) {
+
+    const [user, updateUser] = useState({});
+
+    const ROLE_MAP = {
+        1: "Admin",
+        2: "Moderator",
+        3: "Provider",
+    }
+    
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            axios.get(API_URL + "/auth/user_data",
+                {
+                    headers: {
+                    token: localStorage.getItem("token")
+                },
+            })
+            .then(res => {
+                updateUser(res.data);
+            })
+            .catch(err => console.log(err));
+        }
+    }, [localStorage.getItem("token")])
+
     const getLingks = () => {
         const categories = [
             {
@@ -54,10 +80,10 @@ function Header(props) {
                   <AccountCircleIcon fontSize="large" />
                   <span> USERNAME </span>
                   <ul className="tooltip">
-                    <li> ROLE: <span>ceva</span></li>
-                    <li> LOCATION: <span>ceva</span></li>
-                    <li> EMAIL: <span>ceva</span></li>
-                    <li> PHONE: <span>ceva</span></li>
+                    <li> ROLE: <span className="user-data">{ROLE_MAP[user.role]}</span></li>
+                    <li> LOCATION: <span className="user-data">{user.location?.name}</span></li>
+                    <li> EMAIL: <span className="user-data">{user.email}</span></li>
+                    <li> PHONE: <span className="user-data">{user.phone}</span></li>
                     <li className="logout">
                     <Link
                         to='/login'>

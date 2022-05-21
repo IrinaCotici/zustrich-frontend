@@ -1,3 +1,9 @@
+import { useEffect, useState, } from 'react';
+import axios from "axios";
+import { API_URL, } from "../utils/constants";
+import {
+  Link
+} from "react-router-dom";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,15 +13,54 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Header from '../components/Header';
 
-function createData(name, address, moderators, description, stock) {
-  return { name, address, moderators, description, stock};
-}
-
-const rows = [
-  createData('Gara de nord', 'Calea Grivitei nr 21', 'admin@gmail.com', 'Gara de nord edwceec eededw eddw ed. eddswd', 'see the stock'),
-];
-
 function Locations() {
+  const [user, updateUser] = useState({});
+  const [locations, updateLocations] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      axios.get(API_URL + "/auth/user_data",
+          {
+            headers: {
+              token: localStorage.getItem("token")
+          },
+      })
+      .then(res => {
+        updateUser(res.data);
+      })
+      .catch(err => console.log(err));
+
+      axios.get(API_URL + "/location",
+          {
+            headers: {
+              token: localStorage.getItem("token")
+          },
+      })
+      .then(res => {
+        let locations = res.data;
+
+        axios.get(API_URL + "/user",
+          {
+            headers: {
+              token: localStorage.getItem("token")
+          },
+        })
+        .then(res => {
+          locations = locations.map(location => ({
+            ...location,
+            moderators: res.data
+              .filter(user => user.location?._id === location._id && user.role !== 3 && !user.blocked)
+              .map(user => user.name)
+              .join(", "),
+          }))
+          updateLocations(locations);
+        })
+        .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
+    }
+  }, [localStorage.getItem("token")])
+
   return (
     <div className="main-container wrapper">
       <Header></Header>
@@ -33,16 +78,18 @@ function Locations() {
               </TableRow>
             </TableHead>
             <TableBody>
-              { rows.map((row) => (
+              { locations.map((location) => (
                 <TableRow
-                  key={row.name}
+                  key={location.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.moderators}</TableCell>
-                  <TableCell>{row.description}</TableCell>
-                  <TableCell><a className="add-btn">{row.stock}</a></TableCell>
+                  <TableCell>{location.name}</TableCell>
+                  <TableCell>{location.address}</TableCell>
+                  <TableCell>{location.moderators}</TableCell>
+                  <TableCell>{location.description}</TableCell>
+                  <TableCell>
+                    <Link to={"/location/" + location._id}>SEE THE STOCK</Link>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
