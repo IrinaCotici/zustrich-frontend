@@ -209,6 +209,7 @@ input:-internal-autofill-selected {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  padding-bottom: 50px;
 
   a {
     color: $blue;
