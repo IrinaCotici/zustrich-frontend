@@ -17,11 +17,11 @@ function Requests() {
   const [requests, updateRequests] = useState([]);
 
   useEffect(() => {
-    if ('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0N2Q2ZmYyZjc3YThiZTM3NDZiZSIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTY1MzEyNzY2NywiZXhwIjoxNjUzMTQyMDY3fQ.wXYMK3YagVsk0e3YyCxn7vmRjjQqw9yITYuWhpOwpVc') {
+    if (localStorage.getItem("token")) {
       axios.get(API_URL + "/auth/user_data",
           {
             headers: {
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0N2Q2ZmYyZjc3YThiZTM3NDZiZSIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTY1MzEyNzY2NywiZXhwIjoxNjUzMTQyMDY3fQ.wXYMK3YagVsk0e3YyCxn7vmRjjQqw9yITYuWhpOwpVc'
+              token: localStorage.getItem("token")
           },
       })
       .then(res => {
@@ -33,7 +33,7 @@ function Requests() {
       axios.get(API_URL + "/request",
           {
             headers: {
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0N2Q2ZmYyZjc3YThiZTM3NDZiZSIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTY1MzEyNzY2NywiZXhwIjoxNjUzMTQyMDY3fQ.wXYMK3YagVsk0e3YyCxn7vmRjjQqw9yITYuWhpOwpVc'
+              token: localStorage.getItem("token")
           },
       })
       .then(res => {
@@ -42,14 +42,14 @@ function Requests() {
       })
       .catch(err => console.log(err))
     }
-  }, [])
+  }, [localStorage.getItem("token")])
 
   const fulfillRequest = (request, quantity, index) => {
-    if (!isNaN(quantity) && 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0N2Q2ZmYyZjc3YThiZTM3NDZiZSIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTY1MzEyNzY2NywiZXhwIjoxNjUzMTQyMDY3fQ.wXYMK3YagVsk0e3YyCxn7vmRjjQqw9yITYuWhpOwpVc') {
+    if (!isNaN(quantity) && localStorage.getItem("token")) {
       axios.put(API_URL + "/request/fulfill/" + request._id, { quantity: quantity, },
           {
             headers: {
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0N2Q2ZmYyZjc3YThiZTM3NDZiZSIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTY1MzEyNzY2NywiZXhwIjoxNjUzMTQyMDY3fQ.wXYMK3YagVsk0e3YyCxn7vmRjjQqw9yITYuWhpOwpVc'
+              token: localStorage.getItem("token")
           },
       })
       .then(res => {
@@ -60,13 +60,13 @@ function Requests() {
         };
 
         const fulfilled = {
-          ...res.data.created,
+          ...res.data.fulfilled,
           location: request.location,
           creator: request.creator,
           provider: user,
         };
 
-        if (created) {
+        if (res.data.created) {
           updateRequests([
             ...requests.slice(0, index),
             fulfilled,
