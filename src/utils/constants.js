@@ -9,4 +9,4 @@ export const USER_ROLES = [
   },
 ];
 
-export const API_URL = 'https://mighty-crabs-begin-109-166-128-142.loca.lt';
+export const API_URL = 'https://wet-friends-change-109-166-128-142.loca.lt';

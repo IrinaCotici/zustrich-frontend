@@ -18,6 +18,7 @@ import Requests from './pages/Requests';
 import ViewStock from './pages/ViewStock';
 import axios from "axios";
 
+
 export const UserContext = createContext({
   user: {
     name: '',
@@ -31,6 +32,7 @@ export const UserContext = createContext({
 });
 
 function App() {
+
   const [user, updateUser] = useState({
     name: '',
     location: '',

@@ -3,16 +3,9 @@ import DefaultWrapper from "../components/wrappers/DefaultWrapper"
 import { TextField, Button } from "@material-ui/core";
 import { UserContext, } from '../App.js';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import { useNavigate, } from "react-router-dom";
 import axios from "axios";
 import { API_URL, } from "../utils/constants.js";
-const validationSchema = yup.object({
-  password: yup
-      .string("Enter user's password")
-      .min(4, "Password should be of minimum 8 characters length")
-      .required("Password is required"),
-});
 
 function Login() {
   const navigate = useNavigate();
@@ -20,8 +13,7 @@ function Login() {
     initialValues: {
         email: '',
         password: '',
-    },
-    validationSchema: validationSchema,
+    }
   });
 
   const [reqError, updateReqError] = useState("");
@@ -29,7 +21,6 @@ function Login() {
 
   const _handleChange = (event) => {
     formik[event.target.name] = event.target.value;
-    console.log(formik)
   }
 
   const _onClick = () => {
