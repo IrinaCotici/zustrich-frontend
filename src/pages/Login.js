@@ -1,4 +1,5 @@
 import React, { useState, useContext, } from "react";
+import FacebookLogin from 'react-facebook-login';
 import DefaultWrapper from "../components/wrappers/DefaultWrapper"
 import { TextField, Button } from "@material-ui/core";
 import { UserContext, } from '../App.js';
@@ -51,8 +52,29 @@ function Login() {
         .catch(err => {
             console.log(err);
         })
-}
+  }
 
+  const responseFacebook = (responseBody) => {
+    console.log(responseBody);
+    axios.post(API_URL + "/auth/facebook-login", responseBody)
+      .then(res => {
+        console.log('res', res.data)
+        localStorage.setItem("token", res.data.token);
+        updateUser({
+            name: res.data.name,
+            email: res.data.email,
+            role: res.data.role,
+            phone: res.data.phone,
+            location: res.data.location,
+            blocked: res.data.blocked
+        })
+
+        navigate("/requests");
+      })
+      .catch(err => {
+          console.log(err);
+      })
+  }
 
   return (
     <DefaultWrapper>
@@ -62,6 +84,14 @@ function Login() {
       <TextField onChange={ _handleChange } type="password" name="password" label="Password" variant="outlined" />
       <Button onClick={ _onClick } variant="contained" color="primary">SIGN IN</Button>
       <Button startIcon={<img className="small-icon" src="/google_logo.png" />} variant="contained" color="secondary">SIGN IN WITH GOOGLE</Button>
+      <FacebookLogin
+        appId="1013159789570310"
+        autoLoad={true}
+        fields="name,email,picture"
+        // icon="fa-facebook"
+        // cssClass="my-facebook-button-class"
+        // onClick={componentClicked}
+        callback={responseFacebook}/>
     </DefaultWrapper>
   );
 }
