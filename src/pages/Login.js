@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import { useNavigate, } from "react-router-dom";
 import axios from "axios";
 import { API_URL, } from "../utils/constants.js";
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 function Login() {
   const navigate = useNavigate();
@@ -83,15 +84,18 @@ function Login() {
       <TextField onChange={ _handleChange } name="email" label="Email" variant="outlined" />
       <TextField onChange={ _handleChange } type="password" name="password" label="Password" variant="outlined" />
       <Button onClick={ _onClick } variant="contained" color="primary">SIGN IN</Button>
-      <Button startIcon={<img className="small-icon" src="/google_logo.png" />} variant="contained" color="secondary">SIGN IN WITH GOOGLE</Button>
-      <FacebookLogin
-        appId="1013159789570310"
-        autoLoad={true}
-        fields="name,email,picture"
-        // icon="fa-facebook"
-        // cssClass="my-facebook-button-class"
-        // onClick={componentClicked}
-        callback={responseFacebook}/>
+      {/* <Button startIcon={<img className="small-icon" src="/google_logo.png" />} variant="contained" color="secondary">SIGN IN WITH GOOGLE</Button> */}
+      <div className="fb-container">
+        <FacebookIcon/>
+        <FacebookLogin
+          appId="1013159789570310"
+          autoLoad={true}
+          fields="name,email,picture"
+          // icon="fa-facebook"
+          cssClass="MuiButton-containedSecondary MuiButtonBase-root facebook-btn"
+          // onClick={componentClicked}
+          callback={responseFacebook}/>
+      </div>
     </DefaultWrapper>
   );
 }

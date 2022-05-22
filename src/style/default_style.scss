@@ -471,3 +471,23 @@ input:-internal-autofill-selected {
     padding-left: 45px;
   }
 }
+
+.fb-container {
+  position: relative;
+
+  svg {
+    position: absolute;
+    height: 40px;
+    width: 30px;
+    left: 38px;
+    top: -1px;
+    margin: auto;
+    color: $blue;
+  }
+  .facebook-btn {
+    height: 39px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
