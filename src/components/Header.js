@@ -94,7 +94,7 @@ function Header(props) {
                 </div>
                 <div className="profile">
                   <AccountCircleIcon fontSize="large" />
-                  <span> USERNAME </span>
+                  <span>{ user.name }</span>
                   <ul className="tooltip">
                     <li> ROLE: <span className="user-data">{ROLE_MAP[user.role]}</span></li>
                     <li> LOCATION: <span className="user-data">{user.location?.name}</span></li>
